@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.amap.api.maps.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.xuexiang.xui.widget.searchview.MaterialSearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="?attr/xui_config_content_spacing_horizontal"
+        android:src="@drawable/ic_action_search_white" />
+
+    <RelativeLayout
+        android:layout_marginEnd="@dimen/config_margin_12dp"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/map_distance_ib"
+        android:layout_marginBottom="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <include layout="@layout/menu_statelayout_fab"/>
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/map_mode_ib"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_above="@+id/map_distance_ib"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/config_margin_14dp"
+        android:layout_marginBottom="@dimen/config_margin_14dp"
+        android:background="@drawable/bg_white_round"
+        app:srcCompat="@drawable/ic_baseline_model_training_24" />
+
+    <ImageButton
+        android:id="@+id/map_distance_ib"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_above="@+id/map_release_ib"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/config_margin_14dp"
+        android:layout_marginBottom="@dimen/config_margin_14dp"
+        android:background="@drawable/bg_white_round"
+        app:srcCompat="@drawable/ic_baseline_swap_horizontal_circle_24" />
+
+    <ImageButton
+        android:id="@+id/map_release_ib"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_above="@+id/map_locatenow_ib"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/config_margin_14dp"
+        android:layout_marginBottom="@dimen/config_margin_14dp"
+        android:background="@drawable/bg_white_round"
+        app:srcCompat="@drawable/ic_baseline_new_releases_24" />
+
+    <ImageButton
+        android:id="@+id/map_locatenow_ib"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/config_margin_14dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/bg_white_round"
+        app:srcCompat="@drawable/ic_baseline_my_location_24_gray" />
+
+    <com.xuexiang.xui.widget.textview.supertextview.SuperButton
+        android:id="@+id/map_nowlocation_sb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/config_margin_16dp"
+        android:layout_marginTop="@dimen/config_margin_16dp"
+        android:layout_marginEnd="@dimen/config_margin_2dp"
+        android:layout_toStartOf="@+id/fab"
+        android:text="@string/now_location_sb"
+        android:textColor="@color/black"
+        app:sCornersRadius="50dp"
+        app:sStrokeColor="@color/colorPrimary"
+        app:sStrokeDashGap="5dp"
+        app:sStrokeDashWidth="10dp"
+        app:sStrokeWidth="0.5dp" />
+
+    <ImageButton
+        android:id="@+id/map_add_ib"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_above="@+id/map_subtract_ib"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/config_margin_14dp"
+        android:background="@drawable/bg_white_round"
+        app:srcCompat="@drawable/ic_baseline_add_24" />
+
+    <ImageButton
+        android:outlineAmbientShadowColor="@color/white"
+        android:id="@+id/map_subtract_ib"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/config_margin_14dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/bg_white_round"
+        app:srcCompat="@drawable/ic_baseline_remove_24" />
+
+
+
+
+</RelativeLayout>

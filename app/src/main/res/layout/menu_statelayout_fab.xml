@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.github.clans.fab.FloatingActionMenu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fab_menu"
+    style="@style/FabMenu"
+    android:layout_gravity="bottom|end"
+    app:menu_colorNormal="#3E99D2"
+    app:menu_colorPressed="#2488C6"
+    app:menu_colorRipple="#AF2488C6"
+    app:menu_labels_ellipsize="end"
+    app:menu_labels_singleLine="true"
+    tools:ignore="RtlHardcoded"
+    android:visibility="invisible">
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab_normal"
+        style="@style/FabMenu.Buttons"
+        app:src="@drawable/ic_fab_empty"
+        app:fab_label="正常视图"/>
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab_satellite"
+        style="@style/FabMenu.Buttons"
+        app:src="@drawable/ic_fab_loading"
+        app:fab_label="卫星视图"/>
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab_navigation"
+        style="@style/FabMenu.Buttons"
+        app:src="@drawable/nav_01_nor"
+        app:fab_label="公交视图"/>
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab_night"
+        style="@style/FabMenu.Buttons"
+        app:src="@drawable/ic_share_white_24dp"
+        app:fab_label="夜间视图"/>
+
+
+</com.github.clans.fab.FloatingActionMenu>

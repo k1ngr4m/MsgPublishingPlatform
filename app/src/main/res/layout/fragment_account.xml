@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout style="@style/PullDownStyle">
+
+        <androidx.core.widget.NestedScrollView style="@style/ScrollViewStyle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="20dp">
+
+                <com.xuexiang.xui.widget.textview.supertextview.SuperTextView
+                    android:id="@+id/menu_username"
+                    style="@style/InfoItem.Account"
+                    app:sLeftTextString="用户名"
+                    app:sRightBottomTextColor="@color/xui_btn_gray_normal_color"/>
+
+                <com.xuexiang.xui.widget.textview.supertextview.SuperTextView
+                    android:id="@+id/menu_password"
+                    style="@style/InfoItem.Account"
+                    app:sLeftTextString="设置密码" />
+
+                <com.xuexiang.xui.widget.textview.supertextview.SuperTextView
+                    android:id="@+id/menu_phone"
+                    style="@style/InfoItem.Account"
+                    app:sLeftTextString="验证手机号"
+                    app:sRightBottomTextColor="@color/xui_btn_gray_normal_color"/>
+
+                <com.xuexiang.xui.widget.textview.supertextview.SuperTextView
+                    android:id="@+id/menu_email"
+                    style="@style/InfoItem.Account"
+                    app:sLeftTextString="验证邮箱"
+                    app:sRightBottomTextColor="@color/xui_btn_gray_normal_color"/>
+
+                <com.xuexiang.xui.widget.textview.supertextview.SuperTextView
+                    android:id="@+id/menu_signature"
+                    style="@style/InfoItem.Account"
+                    app:sDividerLineType="none"
+                    app:sLeftTextString="个性签名"
+                    app:sRightBottomTextColor="@color/xui_btn_gray_normal_color"/>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+</LinearLayout>
