@@ -17,6 +17,7 @@
 
 package com.xuexiang.mapandmsg.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -75,17 +76,20 @@ public class MaterialFooter extends ProgressBar implements RefreshFooter {
     }
 
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onStartAnimator(@NonNull RefreshLayout refreshLayout, int height, int maxDragHeight) {
         setVisibility(VISIBLE);
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public int onFinish(@NonNull RefreshLayout refreshLayout, boolean success) {
         setVisibility(GONE);
         return 100;
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onStateChanged(@NonNull RefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
 
@@ -96,21 +100,25 @@ public class MaterialFooter extends ProgressBar implements RefreshFooter {
 
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onInitialized(@NonNull RefreshKernel kernel, int height, int maxDragHeight) {
 
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onMoving(boolean isDragging, float percent, int offset, int height, int maxDragHeight) {
 
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onReleased(@NonNull RefreshLayout refreshLayout, int height, int maxDragHeight) {
 
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onHorizontalDrag(float percentX, int offsetX, int offsetMax) {
 
