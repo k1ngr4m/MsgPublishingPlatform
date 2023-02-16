@@ -26,7 +26,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.amap.api.location.AMapLocation;
 import com.xuexiang.xpage.base.XPageActivity;
 import com.xuexiang.xpage.base.XPageFragment;
 import com.xuexiang.xpage.core.CoreSwitchBean;
@@ -45,7 +44,7 @@ import io.github.inflationx.viewpump.ViewPumpContextWrapper;
  * @author XUE
  * @since 2019/3/22 11:21
  */
-public abstract class BaseActivity extends XPageActivity {
+public class BaseActivity extends XPageActivity {
 
     Unbinder mUnbinder;
 
@@ -190,5 +189,4 @@ public abstract class BaseActivity extends XPageActivity {
         }
     }
 
-    public abstract void onLocationChanged(AMapLocation aMapLocation);
 }

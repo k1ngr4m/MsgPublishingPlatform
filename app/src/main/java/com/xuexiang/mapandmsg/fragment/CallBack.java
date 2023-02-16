@@ -17,7 +17,6 @@
 
 package com.xuexiang.mapandmsg.fragment;
 
-import com.amap.api.location.AMapLocation;
 import com.amap.api.services.core.PoiItem;
 
 /**
@@ -87,8 +86,6 @@ public class CallBack {
          * 告诉main页面更新头像
          */
         void onRefreshHead();
-
-        void onLocationChanged(AMapLocation aMapLocation);
     }
     private OnRefreshHeadListener onRefreshHeadListener;
     public void setOnRefreshHeadListener(OnRefreshHeadListener onRefreshHeadListener) {

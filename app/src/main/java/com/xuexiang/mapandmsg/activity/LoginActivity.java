@@ -3,7 +3,6 @@ package com.xuexiang.mapandmsg.activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
-import com.amap.api.location.AMapLocation;
 import com.xuexiang.mapandmsg.core.BaseActivity;
 import com.xuexiang.mapandmsg.fragment.LoginFragment;
 import com.xuexiang.xui.utils.KeyboardUtils;
@@ -25,11 +24,6 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected boolean isSupportSlideBack() {
         return false;
-    }
-
-    @Override
-    public void onLocationChanged(AMapLocation aMapLocation) {
-
     }
 
     @Override

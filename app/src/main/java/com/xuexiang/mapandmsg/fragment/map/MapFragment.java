@@ -33,7 +33,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.amap.api.location.AMapLocationClient;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdate;
@@ -208,8 +207,6 @@ public class MapFragment extends BaseFragment implements OnLocationGetListener,
      * 初始化地图监听器
      */
     private void initMapListener() {
-        AMapLocationClient.updatePrivacyAgree(getActivity().getApplicationContext(),true);
-        AMapLocationClient.updatePrivacyShow(getActivity().getApplicationContext(),true,true);
         //地图加载监听
         mAMap.setOnMapLoadedListener(this);
         //地图位移监听

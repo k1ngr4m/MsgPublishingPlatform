@@ -56,7 +56,7 @@ public class LocationTask implements AMapLocationListener,
 		return mLocationTask;
 	}
 
-	/**
+	/**  
 	 * 开启单次定位
 	 */
 	public void startSingleLocate() {
@@ -68,7 +68,7 @@ public class LocationTask implements AMapLocationListener,
 
 	}
 
-	/**
+	/**  
 	 * 开启多次定位
 	 */
 	public void startLocate() {
@@ -82,7 +82,7 @@ public class LocationTask implements AMapLocationListener,
 
 	}
 
-	/**
+	/**  
 	 * 结束定位，可以跟多次定位配合使用
 	 */
 	public void stopLocate() {
@@ -90,7 +90,7 @@ public class LocationTask implements AMapLocationListener,
 
 	}
 
-	/**
+	/**  
 	 * 销毁定位资源
 	 */
 	public void onDestroy() {
@@ -135,4 +135,3 @@ public class LocationTask implements AMapLocationListener,
 	}
 
 }
-

@@ -27,9 +27,8 @@ import com.xuexiang.mapandmsg.utils.sdkinit.LeanCloudInit;
 import com.xuexiang.mapandmsg.utils.sdkinit.UMengInit;
 import com.xuexiang.mapandmsg.utils.sdkinit.XBasicLibInit;
 import com.xuexiang.mapandmsg.utils.sdkinit.XUpdateInit;
-//17858621764
-//333781
-//872565
+
+
 /**
  * @author 夕子
  */

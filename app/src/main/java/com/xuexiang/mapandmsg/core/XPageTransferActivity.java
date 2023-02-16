@@ -19,7 +19,6 @@ package com.xuexiang.mapandmsg.core;
 
 import android.os.Bundle;
 
-import com.amap.api.location.AMapLocation;
 import com.xuexiang.mapandmsg.utils.XToastUtils;
 import com.xuexiang.xrouter.annotation.AutoWired;
 import com.xuexiang.xrouter.annotation.Router;
@@ -53,10 +52,5 @@ public class XPageTransferActivity extends BaseActivity {
             XToastUtils.error("页面未找到！");
             finish();
         }
-    }
-
-    @Override
-    public void onLocationChanged(AMapLocation aMapLocation) {
-
     }
 }
