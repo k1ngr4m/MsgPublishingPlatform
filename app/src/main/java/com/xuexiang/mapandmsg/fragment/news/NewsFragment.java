@@ -23,6 +23,7 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -56,8 +57,11 @@ import com.xuexiang.xui.widget.popupwindow.good.IGoodView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 
@@ -291,7 +295,16 @@ public class NewsFragment extends BaseFragment implements CallBack.OnRefreshList
             @SuppressLint("DefaultLocale")
             @Override
             protected void onBindData(RecyclerViewHolder holder, AVObject model, int position) {
-                if (model != null) {
+                String effective_date = model.get("effective_date").toString();
+                System.out.println(model.get("title").toString());
+                boolean isEffective = true;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH:mm:ss", Locale.CHINA);
+                    LocalDateTime deadLine = LocalDateTime.parse(effective_date, formatter);
+                    isEffective = deadLine.isAfter(LocalDateTime.now());
+                }
+
+                if (model != null && isEffective) {
                     file1 = file2 = null;
                     //Profile
                     AVObject owner = model.getAVObject("owner");
@@ -314,26 +327,31 @@ public class NewsFragment extends BaseFragment implements CallBack.OnRefreshList
                     holder.image(R.id.iv_image, file1 == null ? R.drawable.xui_ic_default_img
                             : file1.getUrl());
                     //头像
-                    holder.image(R.id.iv_avatar,owner == null ? R.drawable.head
+                    holder.image(R.id.iv_avatar, owner == null ? R.drawable.head
                             : owner.getAVFile("head") == null ? R.drawable.head
                             : owner.getAVFile("head").getUrl());
-                    holder.text(R.id.tv_comment,"阅读量 " + (model.get("read")
-                    == null ? "0" : model.get("read").toString()));
+                    holder.text(R.id.tv_comment, "阅读量 " + (model.get("read")
+                            == null ? "0" : model.get("read").toString()));
                     holder.click(R.id.card_view, v -> openNewPage(ShowNewInfoFragment.class,
                             ShowNewInfoFragment.KEY_MAP_DATA_TO_SHOW, model.getObjectId()));
                     //点赞
-                    holder.click(R.id.iv_praise,v -> {
-                        holder.image(R.id.iv_praise,R.drawable.ic_good_checked);
+                    holder.click(R.id.iv_praise, v -> {
+                        holder.image(R.id.iv_praise, R.drawable.ic_good_checked);
                         IGoodView mGoodView = new GoodView(getContext());
                         mGoodView.setText("+1")
                                 .setTextColor(Color.parseColor("#f66467"))
                                 .setTextSize(12)
                                 .show(v);
                         praiseInBackground(model.getObjectId());
-                    }) ;
-                    holder.click(R.id.tv_praise,v ->{
+                    });
+                    holder.click(R.id.tv_praise, v -> {
                         praiseInBackground(model.getObjectId());
-                    } );
+                    });
+                }
+                else {
+//                    holder.visible(R.id.card_view_linear, View.GONE);
+                    holder.itemView.setVisibility(View.GONE);
+                    holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0,0));
                 }
             }
 

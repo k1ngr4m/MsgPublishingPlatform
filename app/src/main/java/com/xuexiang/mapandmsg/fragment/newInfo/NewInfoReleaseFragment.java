@@ -54,6 +54,7 @@ import com.xuexiang.xui.widget.button.ButtonView;
 import com.xuexiang.xui.widget.dialog.LoadingDialog;
 import com.xuexiang.xui.widget.edittext.MultiLineEditText;
 import com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText;
+import com.xuexiang.xui.widget.spinner.editspinner.EditSpinner;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -344,7 +345,7 @@ public class NewInfoReleaseFragment extends XPageFragment implements ImageSelect
         if (effective_time.equals("无限制")){
             effective_date = "9999年12月31日 23:59:59";
         } else {
-            effective_time = effective_time.replace("天", "");
+            effective_time = effective_time.replace("小时", "");
             int effective_time_temp = Integer.parseInt(effective_time);
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -353,7 +354,7 @@ public class NewInfoReleaseFragment extends XPageFragment implements ImageSelect
                 //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                 LocalDateTime date = LocalDateTime.parse(date_time, formatter);
                 //加上有效日期
-                LocalDateTime effective_date_temp = date.plusDays(effective_time_temp);
+                LocalDateTime effective_date_temp = date.plusHours(effective_time_temp);
                 //日期转换成String
                 effective_date = effective_date_temp.format(formatter);
             }
