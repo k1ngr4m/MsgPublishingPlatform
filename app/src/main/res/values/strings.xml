@@ -103,5 +103,5 @@
     <string name="modify_signature_tip">个性签名为0~100位字符，支持中文、英文、数字</string>
     <string name="modify_signature">修改个性签名</string>
     <string name="show_news_route">路线</string>
-    <string name="news_release_number_visible_text">可见人数：</string>
+    <string name="news_release_effective_time">有效时间：</string>
 </resources>

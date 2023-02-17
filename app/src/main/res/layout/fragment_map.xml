@@ -21,7 +21,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_gravity="bottom|end"
-        android:layout_margin="?attr/xui_config_content_spacing_horizontal"
+        android:layout_marginStart="?attr/xui_config_content_spacing_horizontal"
+        android:layout_marginTop="?attr/xui_config_content_spacing_horizontal"
+        android:layout_marginEnd="?attr/xui_config_content_spacing_horizontal"
+        android:layout_marginBottom="?attr/xui_config_content_spacing_horizontal"
         android:src="@drawable/ic_action_search_white" />
 
     <RelativeLayout

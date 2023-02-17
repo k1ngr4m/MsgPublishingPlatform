@@ -97,6 +97,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation deps.junit
+    testImplementation project(path: ':app')
+    testImplementation project(path: ':app')
     androidTestImplementation deps.runner
     androidTestImplementation deps.espresso.core
 

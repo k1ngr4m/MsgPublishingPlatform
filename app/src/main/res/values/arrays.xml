@@ -123,9 +123,9 @@
         <item>Beagle</item>
     </string-array>
     
-    <string-array name="news_release_number_visible">
+    <string-array name="news_release_effective_time">
         <item>无限制</item>
-        <item>1</item>
-        <item>5</item>
+        <item>1天</item>
+        <item>5天</item>
     </string-array>
 </resources>

@@ -54,13 +54,14 @@ import com.xuexiang.xui.widget.button.ButtonView;
 import com.xuexiang.xui.widget.dialog.LoadingDialog;
 import com.xuexiang.xui.widget.edittext.MultiLineEditText;
 import com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText;
-import com.xuexiang.xui.widget.spinner.materialspinner.MaterialSpinner;
 
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -108,8 +109,8 @@ public class NewInfoReleaseFragment extends XPageFragment implements ImageSelect
     MaterialEditText materialEditTextPhoneNumber;
     @BindView(R.id.news_release_contacts)
     MaterialEditText materialEditTextContacts;
-    @BindView(R.id.news_release_number_visible)
-    Spinner Spinner_number_visible;
+    @BindView(R.id.news_release_effective_time)
+    Spinner spinner_effective_time;
 
     //加载框
     LoadingDialog mLoadingDialog;
@@ -154,14 +155,13 @@ public class NewInfoReleaseFragment extends XPageFragment implements ImageSelect
         mNewsReleaseTask = NewInfoTask.getInstance();
 
         //可见人数默认值
-        String[] items = getResources().getStringArray(R.array.news_release_number_visible);
+        String[] items = getResources().getStringArray(R.array.news_release_effective_time);
         //声明一个下拉列表的数组适配器
         ArrayAdapter<String> visibleAdapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()), R.layout.item_select, items);
         //设置数组适配器的布局样式
         visibleAdapter.setDropDownViewResource(R.layout.item_dropdown);
-        Spinner_number_visible.setPrompt("请选择可见人数");
-        Spinner_number_visible.setAdapter(visibleAdapter);
-        Spinner_number_visible.setSelection(0);
+        spinner_effective_time.setAdapter(visibleAdapter);
+        spinner_effective_time.setSelection(0);
 //        Spinner_number_visible.setOnItemClickListener(new MySelectedListener());
 
 
@@ -221,12 +221,18 @@ public class NewInfoReleaseFragment extends XPageFragment implements ImageSelect
                     //开始上传数据
                     mLoadingDialog.show();
                     AVObject newsInfo = new AVObject("NewsInfo");
+                    String date_time = materialEditTextTime.getEditValue();
                     newsInfo.put("title", materialEditTextTitle.getEditValue());
-                    newsInfo.put("date", materialEditTextTime.getEditValue());
+                    newsInfo.put("date", date_time);
                     newsInfo.put("address", materialEditTextAddress.getEditValue());
                     newsInfo.put("phone", materialEditTextPhoneNumber.getEditValue());
                     newsInfo.put("contacts", materialEditTextContacts.getEditValue());
                     newsInfo.put("summery", multiLineEditTextSummery.getContentText());
+//                    newsInfo.put("effective_time", spinner_effective_time.getSelectedItem().toString());
+                    //有效时间转化成日期
+                    String effective_date = CalDate(date_time);
+                    newsInfo.put("effective_date", effective_date);
+
                     List<AVFile> avFileList = new ArrayList<>();
                     for (int i = 0; i < mSelectList.size(); i++) {
                         String imgName = "img"
@@ -319,17 +325,39 @@ public class NewInfoReleaseFragment extends XPageFragment implements ImageSelect
             }
         }
     }
-
     @Override
     public void onAddPicClick() {
         Utils.getPictureSelector(this)
                 .selectionMedia(mSelectList)
                 .forResult(PictureConfig.CHOOSE_REQUEST);
     }
-
     @Override
     public void onDestroyView() {
         mLoadingDialog.recycle();
         super.onDestroyView();
+    }
+
+    //有效时间转化成日期
+    public String CalDate(String date_time){
+        String effective_date = null;
+        String effective_time = spinner_effective_time.getSelectedItem().toString();
+        if (effective_time.equals("无限制")){
+            effective_date = "9999年12月31日 23:59:59";
+        } else {
+            effective_time = effective_time.replace("天", "");
+            int effective_time_temp = Integer.parseInt(effective_time);
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                //String转换成日期
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH:mm:ss", Locale.CHINA);
+                //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                LocalDateTime date = LocalDateTime.parse(date_time, formatter);
+                //加上有效日期
+                LocalDateTime effective_date_temp = date.plusDays(effective_time_temp);
+                //日期转换成String
+                effective_date = effective_date_temp.format(formatter);
+            }
+        }
+        return effective_date;
     }
 }

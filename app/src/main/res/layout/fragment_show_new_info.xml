@@ -177,6 +177,29 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/config_margin_2dp"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingBottom="@dimen/config_margin_2dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/news_release_effective_time"
+                    android:textColor="@color/black" />
+
+                <com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText
+                    android:id="@+id/show_news_effective_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView

@@ -90,6 +90,8 @@ public class ShowNewInfoFragment extends XPageFragment {
     ButtonView buttonViewRoute;
     @BindView(R.id.show_news_recycler_view)
     RecyclerView recyclerView;
+    @BindView(R.id.show_news_effective_date)
+    MaterialEditText materialEditTextEffectiveDate;
 
     private String newsInfoID;
     private Dialog mDialog;
@@ -275,12 +277,14 @@ public class ShowNewInfoFragment extends XPageFragment {
         String phone = (String) newInfo.get("phone");
         String contacts = (String) newInfo.get("contacts");
         String summery = (String) newInfo.get("summery");
+        String effective_date = (String) newInfo.get("effective_date");
         materialEditTextTitle.setText(title);
         materialEditTextTime.setText(date);
         materialEditTextAddress.setText(address);
         materialEditTextPhoneNumber.setText(phone);
         materialEditTextContacts.setText(contacts);
         textViewSummery.setText(summery);
+        materialEditTextEffectiveDate.setText(effective_date);
         int imageNum = 8;
         for (int i = 0; i < imageNum; i++) {
             // 图片
