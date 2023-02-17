@@ -853,7 +853,7 @@ public class MapFragment extends BaseFragment implements OnLocationGetListener,
     }
 
     /**
-     * 自定义infowinfow窗口
+     * 自定义infowindow窗口
      */
     public void render(Marker marker, View view) {
 

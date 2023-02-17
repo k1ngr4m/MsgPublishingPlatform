@@ -24,6 +24,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,6 +54,8 @@ import com.xuexiang.xui.widget.button.ButtonView;
 import com.xuexiang.xui.widget.dialog.LoadingDialog;
 import com.xuexiang.xui.widget.edittext.MultiLineEditText;
 import com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText;
+import com.xuexiang.xui.widget.spinner.materialspinner.MaterialSpinner;
+
 
 import org.jetbrains.annotations.NotNull;
 
@@ -104,6 +108,9 @@ public class NewInfoReleaseFragment extends XPageFragment implements ImageSelect
     MaterialEditText materialEditTextPhoneNumber;
     @BindView(R.id.news_release_contacts)
     MaterialEditText materialEditTextContacts;
+    @BindView(R.id.news_release_number_visible)
+    Spinner Spinner_number_visible;
+
     //加载框
     LoadingDialog mLoadingDialog;
     //图片
@@ -145,6 +152,19 @@ public class NewInfoReleaseFragment extends XPageFragment implements ImageSelect
 
         //数据返回任务
         mNewsReleaseTask = NewInfoTask.getInstance();
+
+        //可见人数默认值
+        String[] items = getResources().getStringArray(R.array.news_release_number_visible);
+        //声明一个下拉列表的数组适配器
+        ArrayAdapter<String> visibleAdapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()), R.layout.item_select, items);
+        //设置数组适配器的布局样式
+        visibleAdapter.setDropDownViewResource(R.layout.item_dropdown);
+        Spinner_number_visible.setPrompt("请选择可见人数");
+        Spinner_number_visible.setAdapter(visibleAdapter);
+        Spinner_number_visible.setSelection(0);
+//        Spinner_number_visible.setOnItemClickListener(new MySelectedListener());
+
+
 
         //图片
         GridLayoutManager manager = new GridLayoutManager(getActivity(), 3, RecyclerView.VERTICAL, false);

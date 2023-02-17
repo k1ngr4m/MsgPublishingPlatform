@@ -85,13 +85,6 @@
                     android:text="@string/news_release_address"
                     android:textColor="@color/black" />
 
-                <com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText
-                    android:id="@+id/news_release_address"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:enabled="false"
-                    app:met_iconLeft="@drawable/icon_address"
-                    app:met_iconPadding="5dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -135,6 +128,14 @@
                 android:paddingTop="@dimen/config_margin_2dp"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 android:paddingBottom="@dimen/config_margin_2dp">
+
+                <com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText
+                    android:id="@+id/news_release_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:enabled="false"
+                    app:met_iconLeft="@drawable/icon_address"
+                    app:met_iconPadding="5dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -184,7 +185,28 @@
                     app:met_floatingLabel="highlight"
                     app:mlet_hintText="@string/news_release_summery_hint" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/config_margin_2dp"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingBottom="@dimen/config_margin_2dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/news_release_number_visible_text"
+                    android:textColor="@color/black" />
+
+                <Spinner
+                    android:id="@+id/news_release_number_visible"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/news_release_number_visible" />
+
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

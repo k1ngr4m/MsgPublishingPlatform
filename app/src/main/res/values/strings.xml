@@ -86,7 +86,7 @@
     <string name="news_release_input_err">输入不能为空</string>
     <string name="news_release_summery_hint">请输入...</string>
     <string name="news_release_title_label_text">标题</string>
-    <string name="news_release_17857690690">17857690690</string>
+    <string name="news_release_17857690690">17858621764</string>
     <string name="lab_submit">确定</string>
     <string name="lab_cancel">取消</string>
     <string name="news_release_contacts">联系人：</string>
@@ -103,4 +103,5 @@
     <string name="modify_signature_tip">个性签名为0~100位字符，支持中文、英文、数字</string>
     <string name="modify_signature">修改个性签名</string>
     <string name="show_news_route">路线</string>
+    <string name="news_release_number_visible_text">可见人数：</string>
 </resources>
