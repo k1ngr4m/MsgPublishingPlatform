@@ -17,8 +17,8 @@ import com.xuexiang.mapandmsg.amap.entity.PositionEntity;
  */
 public interface OnLocationGetListener {
 
-	public void onLocationGet(PositionEntity entity);
-	
+	public PositionEntity onLocationGet(PositionEntity entity);
+
 	public void onRegecodeGet(PositionEntity entity);
 }
   

@@ -502,9 +502,11 @@ public class MapFragment extends BaseFragment implements OnLocationGetListener,
 
     /**
      * 定位回调
+     *
+     * @return
      */
     @Override
-    public void onLocationGet(PositionEntity entity) {
+    public PositionEntity onLocationGet(PositionEntity entity) {
         if (entity != null) {
             //用全局变量记录定位的地点
             MyNowPosition.myNowPositionEntity = entity;
@@ -515,6 +517,7 @@ public class MapFragment extends BaseFragment implements OnLocationGetListener,
         } else {
             XToastUtils.error("定位失败！");
         }
+        return entity;
     }
 
     private void moveCenter(LatLng latLng, float zoo) {
@@ -618,7 +621,7 @@ public class MapFragment extends BaseFragment implements OnLocationGetListener,
         drawCenterMarker();
 
 
-        //moveSpecifyLatLng(new LatLng(mNowPosition.getLatitue(),mNowPosition.getLongitude()),14);
+//        moveSpecifyLatLng(new LatLng(mNowPosition.getLatitue(),mNowPosition.getLongitude()));
     }
 
     private void drawCenterMarker() {

@@ -9,7 +9,6 @@
 package com.xuexiang.mapandmsg.amap.task;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.amap.api.location.AMapLocation;
@@ -17,6 +16,9 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.xuexiang.mapandmsg.amap.entity.PositionEntity;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /**
@@ -62,6 +64,7 @@ public class LocationTask implements AMapLocationListener,
 	public void startSingleLocate() {
 		AMapLocationClientOption option=new AMapLocationClientOption();
 		option.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+		option.setInterval(2000);
 		option.setOnceLocation(true);
 		mLocationClient.setLocationOption(option);
 		mLocationClient.startLocation();
@@ -101,30 +104,54 @@ public class LocationTask implements AMapLocationListener,
 
 
 
+//	@Override
+//	public void onLocationChanged(AMapLocation amapLocation) {
+//		if (amapLocation != null && amapLocation.getErrorCode() == 0) {
+//			PositionEntity entity = new PositionEntity();
+//			entity.latitue = amapLocation.getLatitude();
+//			entity.longitude = amapLocation.getLongitude();
+//
+//			if (!TextUtils.isEmpty(amapLocation.getAddress())) {
+//				entity.address = amapLocation.getAddress();
+//				Log.e("Debug:","onLocationChanged:当前地点：" + entity.address);
+//			}else {
+//				Log.e("Debug:","onLocationChanged:address is null");
+//			}
+//			mOnLocationGetlisGetListener.onLocationGet(entity);
+//
+//		}
+//	}
+
 	@Override
 	public void onLocationChanged(AMapLocation amapLocation) {
-		if (amapLocation != null && amapLocation.getErrorCode() == 0) {
-			PositionEntity entity = new PositionEntity();
-			entity.latitue = amapLocation.getLatitude();
-			entity.longitude = amapLocation.getLongitude();
-
-			if (!TextUtils.isEmpty(amapLocation.getAddress())) {
-				entity.address = amapLocation.getAddress();
-				Log.e("Debug:","onLocationChanged:当前地点：" + entity.address);
-			}else {
-				Log.e("Debug:","onLocationChanged:address is null");
+		if (amapLocation != null) {
+			if (amapLocation.getErrorCode() == 0) {
+				PositionEntity entity = new PositionEntity();
+				//定位成功回调信息，设置相关消息
+				amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
+				entity.latitue = amapLocation.getLatitude();//获取纬度
+				entity.longitude = amapLocation.getLongitude();//获取经度
+				amapLocation.getAccuracy();//获取精度信息
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date date = new Date(amapLocation.getTime());
+				df.format(date);//定位时间
+				System.out.println(amapLocation.getAccuracy());
+				mOnLocationGetlisGetListener.onLocationGet(entity);
+			} else {
+				//显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
+				Log.e("AmapError","location Error, ErrCode:"
+						+ amapLocation.getErrorCode() + ", errInfo:"
+						+ amapLocation.getErrorInfo());
 			}
-			mOnLocationGetlisGetListener.onLocationGet(entity);
-
 		}
 	}
-
 	@Override
-	public void onLocationGet(PositionEntity entity) {
+	public PositionEntity onLocationGet(PositionEntity entity) {
 
 		// TODO Auto-generated method stub
 
 
+		return entity;
 	}
 
 	@Override
