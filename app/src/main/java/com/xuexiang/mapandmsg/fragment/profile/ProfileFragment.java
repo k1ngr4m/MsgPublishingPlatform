@@ -174,15 +174,21 @@ public class ProfileFragment extends BaseFragment implements SuperTextView.OnSup
         query.getInBackground(avObject.getObjectId()).subscribe(new Observer<AVObject>() {
             @Override
             public void onSubscribe(Disposable disposable) {}
+//            @Override
+//            public void onNext(AVObject todo) {
+//                AVFile file = todo.getAVFile("head");
+//                if (file != null) {
+//                    String uri = file.getUrl();
+//                    ImageLoader.get().loadImage(rivHeadPic, uri, ResUtils.getDrawable(
+//                            R.drawable.xui_ic_default_img), DiskCacheStrategyEnum.AUTOMATIC);
+//                    Log.e("tag:main","file is null");
+//                }
+//            }
             @Override
             public void onNext(AVObject todo) {
-                AVFile file = todo.getAVFile("head");
-                if (file != null) {
-                    String uri = file.getUrl();
-                    ImageLoader.get().loadImage(rivHeadPic, uri, ResUtils.getDrawable(
-                            R.drawable.xui_ic_default_img), DiskCacheStrategyEnum.AUTOMATIC);
-                    Log.e("tag:main","file is null");
-                }
+                String file = "http://lc-mbiWXKga.cn-n1.lcfile.com/q5b2OAvMXYIN9ozkDzWqsbpbVbwUAkzO/head.png";
+                ImageLoader.get().loadImage(rivHeadPic, file);
+                Log.e("tag:main","file is null");
             }
             @Override
             public void onError(Throwable throwable) {}

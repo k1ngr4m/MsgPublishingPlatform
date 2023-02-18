@@ -211,7 +211,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
             public void onNext(AVObject todo) {
                AVFile file = todo.getAVFile("head");
                 if (file != null) {
-                    String uri = file.getUrl();
+//                    String uri = file.getUrl();
+                    String uri = "http://lc-mbiWXKga.cn-n1.lcfile.com/q5b2OAvMXYIN9ozkDzWqsbpbVbwUAkzO/head.png";
                     ImageLoader.get().loadImage(imageView, uri, ResUtils.getDrawable(
                             R.drawable.xui_ic_default_img), DiskCacheStrategyEnum.AUTOMATIC);
                 }else {
