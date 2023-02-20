@@ -327,9 +327,10 @@ public class NewsFragment extends BaseFragment implements CallBack.OnRefreshList
                     holder.image(R.id.iv_image, file1 == null ? R.drawable.xui_ic_default_img
                             : file1.getUrl());
                     //头像
+                    String url = "http://lc-mbiWXKga.cn-n1.lcfile.com/q5b2OAvMXYIN9ozkDzWqsbpbVbwUAkzO/head.png";
                     holder.image(R.id.iv_avatar, owner == null ? R.drawable.head
                             : owner.getAVFile("head") == null ? R.drawable.head
-                            : owner.getAVFile("head").getUrl());
+                            : url);
                     holder.text(R.id.tv_comment, "阅读量 " + (model.get("read")
                             == null ? "0" : model.get("read").toString()));
                     holder.click(R.id.card_view, v -> openNewPage(ShowNewInfoFragment.class,

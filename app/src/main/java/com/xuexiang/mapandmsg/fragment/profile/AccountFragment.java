@@ -19,12 +19,8 @@ public class AccountFragment extends BaseFragment implements
         SuperTextView.OnSuperTextViewClickListener, CallBack.OnBackUpDataUserNameListener {
     @BindView(R.id.menu_username)
     SuperTextView menuUserName;
-    @BindView(R.id.menu_password)
-    SuperTextView menuPassword;
     @BindView(R.id.menu_phone)
     SuperTextView menuPhone;
-    @BindView(R.id.menu_email)
-    SuperTextView menuEmail;
     @BindView(R.id.menu_signature)
     SuperTextView menuSignature;
 
@@ -46,8 +42,6 @@ public class AccountFragment extends BaseFragment implements
                 : user.get("username").toString());
         menuPhone.setRightBottomString(user.get("mobilePhoneNumber") == null ? "未绑定"
                 : user.get("mobilePhoneNumber").toString());
-        menuEmail.setRightBottomString(user.get("email") == null ? "未绑定"
-                : user.get("email").toString());
         menuSignature.setRightBottomString(user.get("signature") == null ? "未设置"
                 : user.get("signature").toString());
     }

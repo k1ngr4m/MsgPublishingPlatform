@@ -33,6 +33,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.amap.api.location.AMapLocationClient;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdate;
@@ -83,6 +84,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 
 import butterknife.OnClick;
@@ -185,6 +187,8 @@ public class MapFragment extends BaseFragment implements OnLocationGetListener,
      * 初始化地图控件
      */
     private void initMapView() throws Exception {
+        AMapLocationClient.updatePrivacyAgree(getContext(),true);
+        AMapLocationClient.updatePrivacyShow(getContext(),true,true);
         if (mAMap == null) {
             mAMap = mapView.getMap();
         }
