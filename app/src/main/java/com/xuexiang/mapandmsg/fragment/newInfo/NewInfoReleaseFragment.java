@@ -155,7 +155,7 @@ public class NewInfoReleaseFragment extends XPageFragment implements ImageSelect
         //数据返回任务
         mNewsReleaseTask = NewInfoTask.getInstance();
 
-        //可见人数默认值
+        //有效时间默认值
         String[] items = getResources().getStringArray(R.array.news_release_effective_time);
         //声明一个下拉列表的数组适配器
         ArrayAdapter<String> visibleAdapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()), R.layout.item_select, items);
