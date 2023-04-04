@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/config_margin_40dp"
+        app:srcCompat="@drawable/ic_password" />
+
+
+    <TextView
+        style="@style/TextStyle.Title"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:text="设置密码"
+        android:textSize="30sp"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="输入旧密码："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical" />
+
+            <com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText
+                android:id="@+id/et_old_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="86dp"
+                android:hint="@string/tip_password_old"
+                android:inputType="number"
+                app:met_clearButton="true"
+                app:met_errorMessage="@string/tip_password_error"
+                app:met_floatingLabel="normal" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp">
+
+            <TextView
+                android:text="输入新密码："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical" />
+
+            <com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText
+                android:id="@+id/et_new_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="86dp"
+                android:hint="@string/tip_password"
+                android:inputType="number"
+                app:met_clearButton="true"
+                app:met_errorMessage="@string/tip_phone_number_error"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelText="@string/title_phone_number"
+                app:met_regexp="@string/regex_phone_number" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_verify_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="确认新密码："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical" />
+
+            <com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText
+                android:id="@+id/et_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="86dp"
+                android:hint="@string/tip_password_confirm"
+                android:inputType="number"
+                app:met_clearButton="false"
+                app:met_errorMessage="@string/tip_verify_code_error"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelText="@string/lab_verify_code"
+                app:met_maxCharacters="6"
+                app:met_regexp="@string/regex_verify_code" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <com.xuexiang.xui.widget.textview.supertextview.SuperButton
+        android:id="@+id/btn_confirm"
+        style="@style/SuperButton.Primary.Login"
+        android:layout_marginTop="16dp"
+        android:text="@string/title_confirm" />
+
+</LinearLayout>
