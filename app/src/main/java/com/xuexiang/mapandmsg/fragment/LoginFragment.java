@@ -20,6 +20,9 @@ package com.xuexiang.mapandmsg.fragment;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
+
+import androidx.fragment.app.Fragment;
 
 import com.xuexiang.mapandmsg.R;
 import com.xuexiang.mapandmsg.activity.MainActivity;
@@ -68,6 +71,15 @@ public class LoginFragment extends BaseFragment {
     MaterialEditText etVerifyCode;
     @BindView(R.id.btn_get_verify_code)
     RoundButton btnGetVerifyCode;
+
+    @BindView(R.id.fl_verify_code)
+    FrameLayout flVerifyCode;
+
+    @BindView(R.id.et_password)
+    MaterialEditText etPassword;
+
+    @BindView(R.id.fl_password)
+    FrameLayout flPassword;
 
     private CountDownButtonHelper mCountDownHelper;
 
@@ -119,17 +131,31 @@ public class LoginFragment extends BaseFragment {
                 break;
             case R.id.btn_login:
                 if (etPhoneNumber.validate()) {
-                    if (etVerifyCode.validate()) {
-                        loginByVerifyCode(etPhoneNumber.getEditValue(), etVerifyCode.getEditValue());
+                    // 如果是验证码登录
+                    if (flVerifyCode.getVisibility() == View.VISIBLE) {
+                        if (etVerifyCode.validate()) {
+                            loginByVerifyCode(etPhoneNumber.getEditValue(), etVerifyCode.getEditValue());
+                        }
+                    }else {
+                        loginByPassword(etPhoneNumber.getEditValue(), etPassword.getEditValue());
                     }
                 }
                 break;
             case R.id.tv_other_login:
-                XToastUtils.info("其他登录方式");
+                // 换成密码登录
+                if (flPassword.getVisibility() == View.GONE){
+                    flPassword.setVisibility(view.VISIBLE);
+                    flVerifyCode.setVisibility(view.GONE);}
+                else{
+                    // 换成验证码登录
+                    flPassword.setVisibility(view.GONE);
+                    flVerifyCode.setVisibility(view.VISIBLE);
+                }
                 break;
-            case R.id.tv_forget_password:
-                XToastUtils.info("忘记密码");
-                break;
+                // todo 用户设计页面再改
+//            case R.id.tv_forget_password:
+//                openNewPage(ChangePwdFragment.class);
+//                break;
             case R.id.tv_user_protocol:
                 XToastUtils.info("用户协议");
                 Utils.showPrivacyDialog(getContext(), (dialog, which) -> {
@@ -150,6 +176,7 @@ public class LoginFragment extends BaseFragment {
                 break;
         }
     }
+
     private void showDebug(String str){
         Log.e("TAG",str);
     }
@@ -293,7 +320,41 @@ public class LoginFragment extends BaseFragment {
 
     }
 
+    /**
+     * 根据密码登录
+     * @param phoneNumber 手机号
+     * @param password 密码
+     */
 
+    private void loginByPassword(String phoneNumber, String password) {
+        AVUser.loginByMobilePhoneNumber("+86" + phoneNumber,password).subscribe(new Observer<AVUser>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+            }
+
+            @Override
+            public void onNext(AVUser avUser) {
+                // 登录成功
+                XToastUtils.success("登录成功！");
+                onLoginSuccess();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                // 密码不正确
+                XToastUtils.error("登录失败！" +
+                        e.getMessage());
+                showDebug("登录失败！" +
+                        e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
+    }
 
     /**
      * 登录成功的处理
