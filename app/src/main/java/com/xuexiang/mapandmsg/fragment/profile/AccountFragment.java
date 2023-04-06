@@ -24,6 +24,9 @@ public class AccountFragment extends BaseFragment implements
     @BindView(R.id.menu_signature)
     SuperTextView menuSignature;
 
+    @BindView(R.id.menu_change_password)
+    SuperTextView menuChangePassword;
+
 
     @Override
     protected int getLayoutId() {
@@ -48,7 +51,7 @@ public class AccountFragment extends BaseFragment implements
 
 
     @Override
-    @OnClick({R.id.menu_username,R.id.menu_signature})
+    @OnClick({R.id.menu_username,R.id.menu_signature,R.id.menu_change_password})
     public void onClick(SuperTextView superTextView) {
         switch (superTextView.getId()){
             case R.id.menu_username:
@@ -56,6 +59,10 @@ public class AccountFragment extends BaseFragment implements
                 break;
             case R.id.menu_signature:
                 openNewPage(ModifySignatureFragment.class);
+                break;
+            case R.id.menu_change_password:
+                openNewPage(ChangePwdFragment.class);
+                break;
             default:
                 break;
         }

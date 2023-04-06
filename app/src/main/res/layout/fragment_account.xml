@@ -34,6 +34,13 @@
                     app:sLeftTextString="个性签名"
                     app:sRightBottomTextColor="@color/xui_btn_gray_normal_color"/>
 
+                <com.xuexiang.xui.widget.textview.supertextview.SuperTextView
+                    android:id="@+id/menu_change_password"
+                    style="@style/InfoItem.Account"
+                    app:sDividerLineType="none"
+                    app:sLeftTextString="更改密码"
+                    app:sRightBottomTextColor="@color/xui_btn_gray_normal_color"/>
+
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
