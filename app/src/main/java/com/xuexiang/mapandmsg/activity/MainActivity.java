@@ -202,7 +202,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
 
     private void setHead(ImageView imageView) {
         AVObject avObject = user.getAVObject("Profile");
-//        AVObject avObject = new AVObject("Profile");
         AVQuery<AVObject> query = new AVQuery<>("Profile");
         query.getInBackground(avObject.getObjectId()).subscribe(new Observer<AVObject>() {
             @Override

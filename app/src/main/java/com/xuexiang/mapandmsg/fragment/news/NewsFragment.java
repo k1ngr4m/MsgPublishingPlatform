@@ -466,7 +466,7 @@ public class NewsFragment extends BaseFragment implements CallBack.OnRefreshList
 
             @Override
             public void onError(@NotNull Throwable e) {
-
+                XToastUtils.error(e);
             }
 
             @Override

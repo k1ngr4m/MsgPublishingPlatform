@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">地图里的消息</string>
+    <string name="app_name">MesMap</string>
     <string name="app_browser_name">通用浏览器</string>
     <string name="push">根据installationId来推送</string>
     <string name="pushToChannel">根据频道来推送</string>
