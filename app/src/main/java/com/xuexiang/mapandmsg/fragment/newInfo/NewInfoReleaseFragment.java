@@ -21,6 +21,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -55,10 +56,12 @@ import com.xuexiang.xui.widget.dialog.LoadingDialog;
 import com.xuexiang.xui.widget.edittext.MultiLineEditText;
 import com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText;
 import com.xuexiang.xui.widget.spinner.editspinner.EditSpinner;
+import com.xuexiang.xutil.common.ObjectUtils;
 
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Console;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -68,6 +71,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -112,6 +116,8 @@ public class NewInfoReleaseFragment extends XPageFragment implements ImageSelect
     MaterialEditText materialEditTextContacts;
     @BindView(R.id.news_release_effective_time)
     Spinner spinner_effective_time;
+    @BindView(R.id.news_release_random_position)
+    Spinner spinner_random_position;
 
     //加载框
     LoadingDialog mLoadingDialog;
@@ -164,6 +170,15 @@ public class NewInfoReleaseFragment extends XPageFragment implements ImageSelect
         spinner_effective_time.setAdapter(visibleAdapter);
         spinner_effective_time.setSelection(0);
 //        Spinner_number_visible.setOnItemClickListener(new MySelectedListener());
+
+        //随机生成位置默认值
+        String[] items_position = getResources().getStringArray(R.array.news_release_random_position);
+        //声明一个下拉列表的数组适配器
+        ArrayAdapter<String> visibleAdapter_position = new ArrayAdapter<>(Objects.requireNonNull(getActivity()), R.layout.item_select, items_position);
+        //设置数组适配器的布局样式
+        visibleAdapter_position.setDropDownViewResource(R.layout.item_dropdown);
+        spinner_random_position.setAdapter(visibleAdapter_position);
+        spinner_random_position.setSelection(0);
 
 
 
@@ -251,6 +266,8 @@ public class NewInfoReleaseFragment extends XPageFragment implements ImageSelect
                     }
                     //地理点
                     AVGeoPoint point = new AVGeoPoint(latLng.latitude, latLng.longitude);
+                    String random_position = spinner_random_position.getSelectedItem().toString();
+                    point = RandomPoint(point, random_position);
                     newsInfo.put("location", point);
                     //用户
                     AVObject owner = AVUser.getCurrentUser().getAVObject("Profile");
@@ -360,5 +377,30 @@ public class NewInfoReleaseFragment extends XPageFragment implements ImageSelect
             }
         }
         return effective_date;
+    }
+
+    //随机生成位置
+    public AVGeoPoint RandomPoint(AVGeoPoint point, String position) {
+        double lat = point.getLatitude();   //纬度
+        double lng = point.getLongitude();  //经度
+        if (!Objects.equals(position, "否")){
+            boolean isThousand = Objects.equals(position, "1000米");
+            Random rand = new Random();
+            // 根据是否生成1000米内的随机位置，计算生成随机位置的半径
+            double radius = isThousand ? 1000 : 100;
+            // 生成随机位置的纬度
+            double latOffset = rand.nextDouble() * 2 - 1;
+            double latDelta = latOffset / 111111.0 * radius;
+            double newLat = lat + latDelta;
+            // 生成随机位置的经度
+            double lngOffset = rand.nextDouble() * 2 - 1;
+            double lngDelta = lngOffset / (111111.0 * Math.cos(Math.toRadians(lat))) * radius;
+            double newLng = lng + lngDelta;
+            point.setLatitude(newLat);
+            point.setLongitude(newLng);
+            System.out.println("原来的经纬度:" + lat + "/" + lng);
+            System.out.println("新的的经纬度:" + newLat + "/" + newLng);
+        }
+        return point;
     }
 }

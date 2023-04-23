@@ -131,4 +131,10 @@
         <item>12小时</item>
         <item>24小时</item>
     </string-array>
+
+    <string-array name="news_release_random_position">
+        <item>否</item>
+        <item>100米</item>
+        <item>1000米</item>
+    </string-array>
 </resources>

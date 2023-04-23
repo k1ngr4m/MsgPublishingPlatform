@@ -162,7 +162,7 @@ public class ShowNewInfoFragment extends XPageFragment {
 
                         @Override
                         public void onError(@NotNull Throwable e) {
-
+                            System.out.println(e.getMessage());
                         }
 
                         @Override
@@ -175,7 +175,7 @@ public class ShowNewInfoFragment extends XPageFragment {
 
                 @Override
                 public void onError(@NotNull Throwable e) {
-
+                    System.out.println(e.getMessage());
                 }
 
                 @Override

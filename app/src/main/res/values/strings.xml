@@ -110,4 +110,5 @@
     <string name="modify_signature">修改个性签名</string>
     <string name="show_news_route">路线</string>
     <string name="news_release_effective_time">有效时间：</string>
+    <string name="news_release_random_position">随机生成位置：</string>
 </resources>
