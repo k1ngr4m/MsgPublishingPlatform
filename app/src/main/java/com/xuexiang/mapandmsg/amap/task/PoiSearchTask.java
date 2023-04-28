@@ -65,7 +65,7 @@ public class PoiSearchTask implements OnPoiSearchListener {
 		query.setPageNum(0);
 		PoiSearch poiSearch = new PoiSearch(mContext, query);
 		//设置周边搜索的中心点以及半径
-		poiSearch.setBound(new PoiSearch.SearchBound(new LatLonPoint(lat, lng), 1000));
+		poiSearch.setBound(new PoiSearch.SearchBound(new LatLonPoint(lat, lng), 10000));
 		poiSearch.setOnPoiSearchListener(this);
 		poiSearch.searchPOIAsyn();
 	}

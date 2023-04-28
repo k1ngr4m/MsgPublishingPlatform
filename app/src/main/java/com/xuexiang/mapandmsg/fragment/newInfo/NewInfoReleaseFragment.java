@@ -20,6 +20,8 @@ package com.xuexiang.mapandmsg.fragment.newInfo;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -32,12 +34,18 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.services.core.AMapException;
+import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.geocoder.GeocodeSearch;
+import com.amap.api.services.geocoder.RegeocodeAddress;
+import com.amap.api.services.geocoder.RegeocodeQuery;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.xuexiang.mapandmsg.R;
 import com.xuexiang.mapandmsg.activity.MainActivity;
 import com.xuexiang.mapandmsg.adapter.pictureselector.ImageSelectGridAdapter;
+import com.xuexiang.mapandmsg.amap.task.RegeocodeTask;
 import com.xuexiang.mapandmsg.fragment.CallBack;
 import com.xuexiang.mapandmsg.fragment.newInfo.task.NewInfoTask;
 import com.xuexiang.mapandmsg.leancloud.Push;
@@ -63,6 +71,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.Console;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -131,6 +140,12 @@ public class NewInfoReleaseFragment extends XPageFragment implements ImageSelect
     private NewInfoTask mNewsReleaseTask;
     private LatLng latLng;
     AVUser user = AVUser.getCurrentUser();
+
+    private RegeocodeTask mRegeocodeTask;
+    private LatLonPoint latLonPoint;
+    private GeocodeSearch mGeocodeSearch;
+    private RegeocodeAddress mRegeocodeAddress;
+    private static final float SEARCH_RADIUS = 50;
 
     @Override
     protected int getLayoutId() {
@@ -240,7 +255,7 @@ public class NewInfoReleaseFragment extends XPageFragment implements ImageSelect
                     String date_time = materialEditTextTime.getEditValue();
                     newsInfo.put("title", materialEditTextTitle.getEditValue());
                     newsInfo.put("date", date_time);
-                    newsInfo.put("address", materialEditTextAddress.getEditValue());
+//                    newsInfo.put("address", materialEditTextAddress.getEditValue());
                     newsInfo.put("phone", materialEditTextPhoneNumber.getEditValue());
                     newsInfo.put("contacts", materialEditTextContacts.getEditValue());
                     newsInfo.put("summery", multiLineEditTextSummery.getContentText());
@@ -269,6 +284,14 @@ public class NewInfoReleaseFragment extends XPageFragment implements ImageSelect
                     String random_position = spinner_random_position.getSelectedItem().toString();
                     point = RandomPoint(point, random_position);
                     newsInfo.put("location", point);
+
+                    // 逆地理编码
+                    double latitude = point.getLatitude();
+                    double longitude = point.getLongitude();
+                    String addr_res = getAddress(latitude, longitude);
+                    System.out.println(addr_res);
+                    newsInfo.put("address", addr_res);
+
                     //用户
                     AVObject owner = AVUser.getCurrentUser().getAVObject("Profile");
                     newsInfo.put("owner", owner);
@@ -402,5 +425,35 @@ public class NewInfoReleaseFragment extends XPageFragment implements ImageSelect
             System.out.println("新的的经纬度:" + newLat + "/" + newLng);
         }
         return point;
+    }
+
+    //放入经纬度就可以了
+    public String getAddress(double latitude, double longitude) {
+        Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latitude,
+                    longitude, 1);
+            if (addresses.size() > 0) {
+                Address address = addresses.get(0);
+                String data = address.toString();
+//                int startCity = data.indexOf("1:\"") + "1:\"".length();
+//                int endCity = data.indexOf("\"", startCity);
+//                String city = data.substring(startCity, endCity);
+//
+//                int startPlace = data.indexOf("feature=") + "feature=".length();
+//                int endplace = data.indexOf(",", startPlace);
+//                String place = data.substring(startPlace, endplace);
+//                return city + place ;
+                int startAddress = data.indexOf("addressLines=[0:\"") + "addressLines=[0:\"".length();
+                int endAddress = data.indexOf("\"", startAddress);
+                String addr = data.substring(startAddress, endAddress);
+                return addr;
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "获取失败";
     }
 }
