@@ -17,7 +17,10 @@
 
 package com.xuexiang.mapandmsg.fragment;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -118,6 +121,7 @@ public class LoginFragment extends BaseFragment {
                 UMengInit.init(getContext());
             });
         }
+        getIpFromWifi(getContext());
     }
 
     @SingleClick
@@ -272,6 +276,7 @@ public class LoginFragment extends BaseFragment {
             public void onSubscribe(Disposable disposable) {}
             @Override
             public void onNext(AVUser user) {
+                user.put("ip", getIpFromWifi(getContext()));
                 //在_user与profile之间简历一对一的关系
                 if(user.get("Profile") == null){
                     AVObject avObject = new AVObject("Profile");
@@ -334,6 +339,7 @@ public class LoginFragment extends BaseFragment {
 
             @Override
             public void onNext(AVUser avUser) {
+                avUser.put("ip", getIpFromWifi(getContext()));
                 // 登录成功
                 XToastUtils.success("登录成功！");
                 onLoginSuccess();
@@ -374,5 +380,23 @@ public class LoginFragment extends BaseFragment {
         }
         super.onDestroyView();
     }
+
+    private String getIpFromWifi(Context context){
+        WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        if (!wifiManager.isWifiEnabled()){
+            wifiManager.setWifiEnabled(true);
+        }
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        int ipAddress = wifiInfo.getIpAddress();
+        String ipAddr = intToIp(ipAddress);
+        XToastUtils.toast(ipAddr);
+        System.out.println("IP Address: " + ipAddress);
+        return ipAddr;
+    }
+
+    private String intToIp(int i) {
+        return (i & 0xFF) + "." + (( i >> 8 ) & 0xFF) + "." +( ( i >> 16 ) & 0xFF) + "." + ( i >> 24  & 0xFF);
+    }
+
 }
 
